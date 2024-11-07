@@ -7,9 +7,8 @@ import psycopg2
 
 class DatabaseConnector:
 
-    def __init__(self, df, table_name):
-        self.df = df
-        self.table_name = table_name
+    def __init__(self):
+        print("init")
 
     def read_db_creds(self):
         with open('C:/Users/elshu/OneDrive/Documents/Data/AiCore_Projects/multinational-retail-data-centralisation896/db_creds.yaml') as creds:
@@ -28,16 +27,8 @@ class DatabaseConnector:
         return list_of_tables
 
     def upload_to_db(self, df, table_name):
-        engine = create_engine('postgresql://postgres:password@localhost:5432/sales_data')
-        df.to_sql(table_name, engine)
+        self.engine = create_engine('postgresql://postgres:password@localhost:5432/sales_data')
+        df.to_sql(table_name, self.engine)
 
-## NEXT TIME! TRY AND USE THIS ABOVE METHOD TO ADD DATA TO PGADMIN
-
-
-#        HOST = 'local_host'
-#        USER = 'postgres'
-#        PASSWORD = 'password'
-#        DATABASE = 'sales_data'
-#        PORT = 5432
-#        with psycopg2.connect(host=HOST, user=USER, password=PASSWORD, database=DATABASE, port=PORT) as conn:
-#            with conn.cursor() as cur:
+database = DatabaseConnector()
+print(database.list_db_tables())
