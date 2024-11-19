@@ -47,6 +47,8 @@ data_extraction.py: contains the class DataExtractor
 
 queries.sql: contains SQL queries
 
+Missing: This project was supposed to contain the queries for altering the database, however I did not realise this until the very end and it would be too time-consuming to go back now.
+
 ## License information
 n/a
 
