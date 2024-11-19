@@ -1,4 +1,4 @@
--- Task 1: How many stores does the business have and in which countries? --
+-- Task 1: How many stores does the business have and in which countries?
 
 SELECT
     country_code AS country,
