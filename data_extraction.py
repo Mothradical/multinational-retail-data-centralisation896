@@ -15,20 +15,33 @@ class DataExtractor:
         print("init")
         
     def read_rds_tables(self, DatabaseConnector, table_name, localpath):
+        '''
+        This method reads data from a specified table and converts it into a Pandas Dataframe
+        '''
         engine = DatabaseConnector.init_db_engine(localpath)
         df = pd.read_sql_table(table_name, engine)
         return df
     
     def retrieve_pdf_data(self, pdf_path):
+        '''
+        This method reads an online pdf as a list of Pandas Series and converts them into a Dataframe
+        '''
         dfs = tabula.read_pdf(pdf_path, multiple_tables=True, stream=True, lattice=True, pages='all')
         df = pd.concat(dfs)
         return df
 
     def list_number_of_stores(self, endpoint, headers_dict):
+        '''
+        This method finds the 'numer of stores' from a URL
+        '''
         response = requests.get(endpoint, headers=headers_dict)
-        return response
+        return response.text
 
     def retrieve_stores_data(self, headers_dict):
+        '''
+        This method retrieves store data from 451 iterations of a URL
+        and returns them as a single Pandas Dataframe
+        '''
         store_numbers = list(range(0, 451))
         list_of_dicts = []
         for store_number in store_numbers:
@@ -42,5 +55,8 @@ class DataExtractor:
         return df
     
     def extract_from_s3(self, product_details_url):
+        '''
+        This method extracts data from an AWS S3 bucket
+        '''
         data = pd.read_csv(product_details_url)
         return data
