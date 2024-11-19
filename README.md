@@ -40,8 +40,11 @@ Following this, the queries in queries.sql should run without issue.
 ## File structure of the project
 
 database_utils.py: contains the class DatabaseConnector
+
 data_cleaning.py: contains the class DataCleaning
+
 data_extraction.py: contains the class DataExtractor
+
 queries.sql: contains SQL queries
 
 ## License information
