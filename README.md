@@ -10,6 +10,10 @@ The first aim of this project was to build Python Classes to extract and clean d
 
 The second aim of this project was to run SQL queries to build the database schema, and then run a series of queries on the data.
 
+Throughout this project, the primary lesson I learned was "if you don't use it, you lose it". Haven't not coded with Python for a few weeks, the early stages of this project were extremely difficult, as I repeatedly made basic erros in my code and forgot how Python Classes worked. After a while it all started to make sense again.
+
+A second lesson I learned was to never take the easy, albiet time-comsuming way out by cleaning each piece of data that causes an error, and to instead refer to documentation for solutions. For example, I initially began to write a line of code in a cleaning method for every instance of a value that could not be converted to datatime. However, engaging with the documentation for .pd.to_datetime() revealed an error handling parameter, using which I could set all of these instances to NULL values and remove them later with .dropna(). This required more intellectual engagement than simply dealing with each error as it arose, but saved time not just on this method, but nearly every subsequent cleaning method.
+
 ## Installation instructions
 
 The python (.py) files each contain a Class. To use them, copy/paste the code into your own Python code, or simply download files.
