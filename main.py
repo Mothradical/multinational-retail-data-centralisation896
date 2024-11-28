@@ -196,6 +196,3 @@ class DataCleaning:
 db_con = DatabaseConnector()
 data_ext = DataExtractor()
 data_clean = DataCleaning()
-
-df = data_ext.retrieve_stores_data(db_con, sec_det_pth)
-print(df.info())
