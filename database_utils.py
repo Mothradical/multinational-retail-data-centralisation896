@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy import inspect
 import pandas as pd
 localpath = 'C:/Users/elshu/OneDrive/Documents/Data/AiCore_Projects/multinational-retail-data-centralisation896/db_creds.yaml'
-upload_path = 'postgresql://postgres:password@localhost:5432/sales_data'
+sec_det_pth = 'C:/Users/elshu/OneDrive/Documents/Data/AiCore_Projects/multinational-retail-data-centralisation896/security_creds.yaml'
 
 
 class DatabaseConnector:
@@ -41,10 +41,12 @@ class DatabaseConnector:
         list_of_tables = inspector.get_table_names()
         return list_of_tables
 
-    def upload_to_db(self, df, table_name, upload_path):
+    def upload_to_db(self, df, table_name, sec_det_pth):
         '''
         This method transforms a Pandas Dataframe to SQL and
         uploads it to a database as a Table
         '''
+        sec_creds = self.read_db_creds(sec_det_pth)
+        upload_path = sec_creds['upload_path']
         engine = create_engine(upload_path)
         df.to_sql(table_name, engine)

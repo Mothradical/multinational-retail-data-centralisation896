@@ -5,7 +5,7 @@ import ast
 localpath = 'C:/Users/elshu/OneDrive/Documents/Data/AiCore_Projects/multinational-retail-data-centralisation896/db_creds.yaml'
 pdf_path = "https://data-handling-public.s3.eu-west-1.amazonaws.com/card_details.pdf"
 product_details_url = 's3://data-handling-public/products.csv'
-headers_dict = {'x-api-key': 'yFBQbwXe9J3sd6zWVAMrK6lcxxr0q1lr2PT6DDMX'}
+sec_det_pth = 'C:/Users/elshu/OneDrive/Documents/Data/AiCore_Projects/multinational-retail-data-centralisation896/security_creds.yaml'
 endpoint = 'https://aqj7u5id95.execute-api.eu-west-1.amazonaws.com/prod/number_stores'
 
 
@@ -30,18 +30,20 @@ class DataExtractor:
         df = pd.concat(dfs)
         return df
 
-    def list_number_of_stores(self, endpoint, headers_dict):
+    def list_number_of_stores(self, DatabaseConnector, sec_det_pth, endpoint):
         '''
         This method finds the 'numer of stores' from a URL
         '''
+        headers_dict = DatabaseConnector.read_db_creds(sec_det_pth)
         response = requests.get(endpoint, headers=headers_dict)
         return response.text
 
-    def retrieve_stores_data(self, headers_dict):
+    def retrieve_stores_data(self, DatabaseConnector, sec_det_pth):
         '''
         This method retrieves store data from 451 iterations of a URL
         and returns them as a single Pandas Dataframe
         '''
+        headers_dict = DatabaseConnector.read_db_creds(sec_det_pth)
         store_numbers = list(range(0, 451))
         list_of_dicts = []
         for store_number in store_numbers:
